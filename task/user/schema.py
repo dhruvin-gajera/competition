@@ -5,11 +5,14 @@ import uuid
 from typing import Optional
 
 class UserBase(BaseModel):
-    
+    id:int
     name: str
     email: EmailStr
     age: Optional[int] = None
     gender: Optional[str] = None
+
+    class Config:
+        orm_mode = True
 
 
 class UserCreate(UserBase):
@@ -25,7 +28,7 @@ class UserUpdate(BaseModel):
 
 
 class UserResponse(UserBase):
-    id: str
+    id: int
     is_deleted: bool
 
     class Config:
@@ -53,8 +56,8 @@ class CompetitionUpdate(BaseModel):
 
 
 class CompetitionEntryBase(BaseModel):
-    user_id: str
-    competition_id: str
+    user_id: int
+    competition_id: int
     is_deleted: Optional[bool] = False
 
     class Config:

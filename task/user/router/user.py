@@ -10,7 +10,7 @@ router = APIRouter(prefix="/users", tags=["User"])
 @router.post("/", response_model=schema.UserBase)
 def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
     new_user = models.User(
-        id=str(uuid4()),  # Generate UUID as a string for the id
+        id=user.id,  # Generate UUID as a string for the id
         name=user.name,
         email=user.email,
         password=user.password,  # Remember to hash the password
